@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101c3d">
+<title>برای آوین، با عشق</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+  :root { --ink:#f7f8ff; --muted:#d9e2ff; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; color:var(--ink);
+    font-family:"Vazirmatn",Tahoma,sans-serif;
+    background:radial-gradient(ellipse at 20% 15%,#344d83 0%,transparent 38%),
+               radial-gradient(ellipse at 85% 85%,#382d67 0%,transparent 42%),
+               linear-gradient(145deg,#081329,#14264d 55%,#201b43);
+    transition:background 1.1s ease;
+  }
+  body.pink {
+    background:radial-gradient(ellipse at 15% 10%,#9a557e 0%,transparent 38%),
+               radial-gradient(ellipse at 90% 85%,#5e477e 0%,transparent 42%),
+               linear-gradient(145deg,#28172f,#58334f 55%,#29234d);
+  }
+  body.rose {
+    background:radial-gradient(ellipse at 20% 15%,#a65d83 0%,transparent 40%),
+               radial-gradient(ellipse at 85% 90%,#77528c 0%,transparent 45%),
+               linear-gradient(145deg,#24162f,#4d3158 55%,#252447);
+  }
+  .stars,.hearts { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+  .star { position:absolute; width:2px;height:2px;border-radius:50%;background:#fff;opacity:.55;animation:twinkle 3s infinite ease-in-out; }
+  @keyframes twinkle { 50%{opacity:.12;transform:scale(.6)} }
+  .heart { position:absolute; color:#ffc7e3; opacity:.28; animation:floatUp linear infinite; }
+  @keyframes floatUp { from{transform:translateY(110vh) rotate(0deg);opacity:0} 12%{opacity:.35} to{transform:translateY(-15vh) rotate(35deg);opacity:0} }
+  main { position:relative; z-index:1; min-height:100vh; display:grid; place-items:center; padding:28px 16px 42px; }
+  .wrap { width:min(760px,100%); }
+  .topline { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; color:#dbe6ff; font-size:13px; }
+  .music {
+    border:1px solid #ffffff35; background:#ffffff12; color:#fff; border-radius:999px;
+    padding:9px 14px; font:inherit; cursor:pointer; backdrop-filter:blur(10px);
+  }
+  .card {
+    position:relative; padding:clamp(26px,6vw,54px); border:1px solid #ffffff35;
+    border-radius:30px; background:linear-gradient(145deg,#ffffff1c,#ffffff0a);
+    box-shadow:0 24px 80px #03081780, inset 0 1px #ffffff25;
+    backdrop-filter:blur(18px); text-align:center; overflow:hidden;
+    animation:appear .8s ease both;
+  }
+  .card:before { content:"";position:absolute;inset:0 18% auto;height:1px;background:linear-gradient(90deg,transparent,#ffffff80,transparent); }
+  @keyframes appear { from{opacity:0;transform:translateY(18px) scale(.985)} to{opacity:1;transform:none} }
+  .moon { font-size:52px; filter:drop-shadow(0 0 20px #d8dfff99); margin-bottom:12px; }
+  h1 { font-size:clamp(27px,5vw,42px); margin:0 0 16px; line-height:1.6; font-weight:800; }
+  .intro { color:#e3eaff; line-height:2.2; font-size:16px; margin:0 auto 28px; max-width:560px; }
+  .message { color:#f9f5ff; font-size:clamp(15px,2.4vw,18px); line-height:2.45; white-space:pre-line; text-align:right; }
+  .message p { margin:0; }
+  .eyebrow { color:#d4dcff; font-size:13px; letter-spacing:.4px; margin-bottom:12px; }
+  .actions { display:flex; justify-content:center; margin-top:30px; }
+  .next {
+    border:0; cursor:pointer; color:#20274b; font:700 16px "Vazirmatn",sans-serif;
+    padding:13px 34px; min-width:150px; border-radius:999px;
+    background:linear-gradient(110deg,#fff,#dce6ff); box-shadow:0 8px 28px #08132e55;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .next:hover { transform:translateY(-3px);box-shadow:0 12px 32px #08132e80; }
+  .next:active { transform:scale(.98); }
+  .small-note { color:#dce3ff9c; font-size:12px; margin-top:20px; }
+  .hidden { display:none; }
+  .final-mark { margin-top:24px; font-size:27px; letter-spacing:8px; color:#ffd8ed; }
+  @media(max-width:480px){ main{padding:18px 12px 28px}.card{border-radius:23px}.topline{font-size:11px}.message{line-height:2.25} }
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<div class="hearts" id="hearts"></div>
+<main>
+  <div class="wrap">
+    <div class="topline">
+      <span>یک گوشه‌ی کوچک از دنیای من، برای تو</span>
+      <button class="music" id="musicBtn" type="button">♫ پخش موسیقی</button>
+    </div>
+
+    <section class="card" id="page0">
+      <div class="moon">☾</div>
+      <div class="eyebrow">برای آوین، با تمام حس‌های قشنگ</div>
+      <h1>یه چیزی برات دارم...</h1>
+      <p class="intro">چند تا حرف که شاید گفتنشون ساده نباشه،<br>ولی دلم می‌خواست یه جایی برای تو بنویسمشون.</p>
+      <div class="actions"><button class="next" type="button" onclick="goTo(1)">شروع</button></div>
+      <div class="small-note">بهتره موسیقی رو هم روشن کنی ♡</div>
+    </section>
+
+    <section class="card hidden" id="page1">
+      <div class="eyebrow">صفحه‌ی اول · از دلتنگی‌های کوچیک</div>
+      <h1>سلام به بهترین دوست‌دختر جهان 💙</h1>
+      <div class="message">سلام به بهترین دوست دختر جهان
+چطوری قربونت بشم، نمیدونی چقدر دوست دارم و چقدر از لحظه های زندگیم دارم به تو فکر میکنم
+
+ی فکت بخوام بگم من خیلی وقت ها ک دلم برات تنگ میشه، هر زمانی که حالا نیستی یا درس میخونی یا مدرسه ای یا خواب یا بیرونی و هرچی
+میام تو چت همینجوری به صفحه چت نگاه میکنم و چت های اخیرو نگاه میکنم و پیام های قشنگتو میبینم
+
+اگه دیگه خیلی دلم تنگ بشه برات خب عکسی که ندارم ولی ی چند تا عکس از ناخونات دارم اونارو میشینم میبینم، صداشو درنیار ولی این روتین زندگیمه همیشه این کارا رو میکنم 😂
+
+چون دلم خیلی برات تنگ میشه همیشه</div>
+      <div class="actions"><button class="next" type="button" onclick="goTo(2)">بعدی</button></div>
+    </section>
+
+    <section class="card hidden" id="page2">
+      <div class="eyebrow">صفحه‌ی دوم · یه خواب قشنگ</div>
+      <h1>دیشب توی خوابم بودی... 💗</h1>
+      <div class="message">دیشب ی خواب دیدم که تو توش بودی
+خیلی خواب قشنگی بود
+من معمولا خواب نمیبینم و یادم نمیاد
+ولی این خوابو قشنگ یادمه تک تک لحظه هاشو
+
+خیلی خواب قشنگی بود، اصلا همین که تو توی خوابم بودی قشنگ بود، خوابش ساده بودا ولی همین کارا هم با تو خیلی قشنگ دیده میشد برام، لعنتی عین فیلم بود هم ناراحتی توش بود هم شادی
+باز خوبه پایانش شاد بود
+
+میشه بازم به خوابم بیای؟ 😂</div>
+      <div class="actions"><button class="next" type="button" onclick="goTo(3)">بعدی</button></div>
+    </section>
+
+    <section class="card hidden" id="page3">
+      <div class="eyebrow">صفحه‌ی سوم · حرفی از ته دل</div>
+      <h1>آوینِ من... 🌙</h1>
+      <div class="message">آوین، میدونم شاید خیلی تکراری شده باشه که هی میگم عاشقتم هی میگم دوست دارم
+اره میدونم، ولی خب باز میخوام اینو تو بدونی 😂
+
+یکم خل شدم، یکم که نه خیلی خل شدم برات 😂
+
+میدونم شرایطتو و درک میکنمش خوشگلم
+و منم تا آخرش هستم برات، تا آخرین روزی که منو قبول کنی
+همیشه و هرجا، اگه پیشت بودم اره شرایط ممکن بود بهتر و فرق زیادی میکرد، ولی من گفتم من حاظرم ۳ سال صبر بکنم که خب اره ۳ سال زیاده ولی خب من شده برای تو صبر میکنم که آخرش تورو ببینم،</div>
+      <div class="actions"><button class="next" type="button" onclick="goTo(4)">بعدی</button></div>
+    </section>
+
+    <section class="card hidden" id="page4">
+      <div class="eyebrow">صفحه‌ی آخر · یه یادآوری کوچولو</div>
+      <h1>هر حسی داری، می‌تونی بهم بگی 💞</h1>
+      <div class="message">عشقم، اگه تو رابطمون احساس فراز و نشیب
+احساس خستگی، احساس دلتنگی
+یا هر حسی که باعث باشه تو فکر بری باشه
+اینا کاملا طبیعیه، چون ما دور از هم هستیم، و ارتباطمون محدوده، هر حسی که میگیری و میگی ای بابا
+اینا همشون طبیعین
+به خاطر اینه که ما از لحاظ فیزیکی کنار هم نیستیم
+و ی سری مشکلات و دردسر های خودمون رو داریم
+
+خلاصه خواستم بدونی اگه ی مدتی خسته شدی یا احساس پایینی داشته اینا احتمالا سر همینه
+و نمیخوام غصشو بخوری قربونت بشم
+قربون اون مغز با هوشت برم، قربون اون دل قشنگت برم
+قربون اون صورت خوشگل تر از ماهت برم
+قربون اون چشای قشنگت بشم من</div>
+      <div class="final-mark">♡ ♡ ♡</div>
+      <div class="small-note">این چند صفحه، فقط برای تو نوشته شد.</div>
+      <div class="actions"><button class="next" type="button" onclick="goTo(0)">از اول بخونیم</button></div>
+    </section>
+  </div>
+</main>
+
+<script>
+  // آسمان پرستاره
+  const stars = document.getElementById('stars');
+  for (let i=0;i<75;i++) {
+    const s=document.createElement('i'); s.className='star';
+    s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=(Math.random()*4)+'s'; s.style.opacity=(.2+Math.random()*.6);
+    stars.appendChild(s);
+  }
+
+  // قلب‌های شناور در صفحه‌ی خواب و صفحه‌های پایانی
+  const hearts = document.getElementById('hearts');
+  for (let i=0;i<24;i++) {
+    const h=document.createElement('span'); h.className='heart'; h.textContent=['♡','♥','ღ'][i%3];
+    h.style.left=Math.random()*100+'%'; h.style.animationDuration=(12+Math.random()*15)+'s';
+    h.style.animationDelay=(-Math.random()*20)+'s'; h.style.fontSize=(12+Math.random()*18)+'px';
+    hearts.appendChild(h);
+  }
+
+  function goTo(n) {
+    document.querySelectorAll('main .card').forEach(el=>el.classList.add('hidden'));
+    document.getElementById('page'+n).classList.remove('hidden');
+    document.body.classList.toggle('pink', n===2);
+    document.body.classList.toggle('rose', n>=3);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  // موسیقی اورجینال و آرامِ پیانو-مانند با Web Audio؛ برای شروع، نیاز به لمس دکمه دارد.
+  let audioCtx=null, master=null, musicOn=false, timer=null, noteIndex=0;
+  const progression=[
+    [261.63,329.63,392.00,493.88],
+    [220.00,261.63,329.63,440.00],
+    [174.61,220.00,261.63,349.23],
+    [196.00,246.94,293.66,392.00]
+  ];
+  function playNote(freq, start, duration, volume) {
+    const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+    const shimmer=audioCtx.createOscillator(), shimmerGain=audioCtx.createGain();
+    osc.type='triangle'; osc.frequency.setValueAtTime(freq,start);
+    shimmer.type='sine'; shimmer.frequency.setValueAtTime(freq*2.003,start);
+    shimmerGain.gain.setValueAtTime(volume*.12,start);
+    gain.gain.setValueAtTime(.0001,start);
+    gain.gain.exponentialRampToValueAtTime(volume,start+.035);
+    gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+    osc.connect(gain); gain.connect(master);
+    shimmer.connect(shimmerGain); shimmerGain.connect(master);
+    osc.start(start); shimmer.start(start);
+    osc.stop(start+duration+.03); shimmer.stop(start+duration+.03);
+  }
+  function stepMusic() {
+    if(!musicOn || !audioCtx) return;
+    const chord=progression[Math.floor(noteIndex/4)%progression.length];
+    const t=audioCtx.currentTime+.04;
+    const melody=[2,1,3,1,2,0,1,2][noteIndex%8];
+    playNote(chord[melody]*2,t,2.4,.045);
+    if(noteIndex%4===0) playNote(chord[0],t,3.2,.035);
+    if(noteIndex%4===2) playNote(chord[2],t+.03,2.8,.025);
+    noteIndex++;
+  }
+  async function toggleMusic() {
+    const btn=document.getElementById('musicBtn');
+    if(!audioCtx) {
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC){btn.textContent='موسیقی در این مرورگر پشتیبانی نمی‌شود';return;}
+      audioCtx=new AC(); master=audioCtx.createGain(); master.gain.value=.55; master.connect(audioCtx.destination);
+    }
+    if(!musicOn) {
+      await audioCtx.resume(); musicOn=true; stepMusic(); timer=setInterval(stepMusic,850);
+      btn.textContent='♫ توقف موسیقی';
+    } else {
+      musicOn=false; clearInterval(timer); await audioCtx.suspend();
+      btn.textContent='♫ پخش موسیقی';
+    }
+  }
+  document.getElementById('musicBtn').addEventListener('click',toggleMusic);
+</script>
+</body>
+</html>
